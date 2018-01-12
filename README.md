@@ -19,17 +19,17 @@ $ calc 4^2 + sqrt 25 - 20
 
 ## Language Specification
 ```
-Program     => Expression+
-Expression  => ( Expression ) | UnaryOperation Expression | Expression BinaryOperation Expression | Number
+Program         => Expression+
+Expression      => ( Expression ) | UnaryOperation Expression | Expression BinaryOperation Expression | Number
 
-UnaryOperation => - | sqrt | √
+UnaryOperation  => - | sqrt | √
 BinaryOperation => + | - | / | * | ^
 
-Number      => Integer | Float
-Integer     => Digits
-Float       => Digits . Digits | . Digits | Digits .
+Number          => Integer | Float
+Integer         => Digits
+Float           => Digits . Digits | . Digits | Digits .
 
-Digits      => [0-9]+
+Digits          => [0-9]+
 ```
 
 _Notes (not necessarily related to the specification):_
