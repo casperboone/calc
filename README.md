@@ -28,6 +28,8 @@ BinaryOperation => + | - | / | * | ^
 Number      => Integer | Float
 Integer     => Digits
 Float       => Digits . Digits | . Digits | Digits .
+
+Digits      => [0-9]+
 ```
 
 _Notes (not necessarily related to the specification):_
