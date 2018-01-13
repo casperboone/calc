@@ -5,7 +5,7 @@ import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.grammar.parseToEnd
 import com.github.h0tk3y.betterParse.grammar.parser
 import com.github.h0tk3y.betterParse.parser.Parser
-import nl.casperboone.calc.expressions.desugarable.Addition
+import nl.casperboone.calc.expressions.desugarable.BinaryOperation
 import nl.casperboone.calc.expressions.desugarable.DesugarableExpression
 import nl.casperboone.calc.expressions.desugarable.Integer
 
@@ -14,6 +14,7 @@ object Grammar : Grammar<DesugarableExpression>() {
     private val RPAR by token("\\)")
     private val INTEGER_CONSTANT by token("\\d+")
     private val ADDITION by token("\\+")
+    private val SUBTRACTION by token("\\-")
     private val WHITESPACE by token("\\s+", ignore = true)
 
     private val bracedExpression by -LPAR * parser(this::expr) * -RPAR
@@ -22,7 +23,8 @@ object Grammar : Grammar<DesugarableExpression>() {
             (INTEGER_CONSTANT map { Integer(it.text.toInt()) }) or
             bracedExpression
 
-    private val addChain by leftAssociative(term, ADDITION) { a, _, b -> Addition(a, b) }
+    private val binaryOperatorTokens = ADDITION or SUBTRACTION
+    private val addChain by leftAssociative(term, binaryOperatorTokens) { a, op, b -> BinaryOperation(op.text, a, b)  }
 
     private val expr = addChain
 

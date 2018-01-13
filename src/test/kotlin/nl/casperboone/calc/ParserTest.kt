@@ -1,6 +1,6 @@
 package nl.casperboone.calc
 
-import nl.casperboone.calc.expressions.desugarable.Addition
+import nl.casperboone.calc.expressions.desugarable.BinaryOperation
 import nl.casperboone.calc.expressions.desugarable.Integer
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
@@ -16,7 +16,8 @@ class ParserTest : Spek({
         it("should parse an addition") {
             assertThat(Grammar.parseProgram("1 + 2"))
                     .isEqualTo(
-                            Addition(
+                            BinaryOperation(
+                                    "+",
                                     Integer(1),
                                     Integer(2)
                             )
@@ -26,8 +27,10 @@ class ParserTest : Spek({
         it("should parse nested additions left associatively") {
             assertThat(Grammar.parseProgram("1 + 2 + 3"))
                     .isEqualTo(
-                            Addition(
-                                    Addition(
+                            BinaryOperation(
+                                    "+",
+                                    BinaryOperation(
+                                            "+",
                                             Integer(1),
                                             Integer(2)
                                     ),
@@ -39,9 +42,11 @@ class ParserTest : Spek({
         it("should give precedence to addition statements between braces") {
             assertThat(Grammar.parseProgram("1 + (2 + 3)"))
                     .isEqualTo(
-                            Addition(
+                            BinaryOperation(
+                                    "+",
                                     Integer(1),
-                                    Addition(
+                                    BinaryOperation(
+                                            "+",
                                             Integer(2),
                                             Integer(3)
                                     )
