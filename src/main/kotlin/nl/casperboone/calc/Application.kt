@@ -9,7 +9,9 @@ fun main(args: Array<String>) {
 }
 
 fun evaluate(program: String): Value {
-    val AST = Grammar.parseProgram(program)
+    val parsedAST = Grammar.parseProgram(program)
+    val desugaredAST = parsedAST.desugar()
+    val typeCheckedAST = desugaredAST.checkTypes()
 
-    return Interpreter.interpret(AST)
+    return typeCheckedAST.interpret()
 }

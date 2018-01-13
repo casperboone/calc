@@ -39,3 +39,8 @@ _Notes (not necessarily related to the specification):_
 > 
 > In the current version multiple-expression programs are not allowed.
 
+## Evaluation Workflow
+1. Parsing to `DesugarableExpression`
+2. Desugar to `TypeCheckableExpression`
+2. Type check and transform to `InterpretableExpression`
+4. Interpret to `Value`

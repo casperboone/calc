@@ -1,7 +1,7 @@
 package nl.casperboone.calc
 
-import nl.casperboone.calc.expressions.Addition
-import nl.casperboone.calc.expressions.Integer
+import nl.casperboone.calc.expressions.desugarable.Addition
+import nl.casperboone.calc.expressions.desugarable.Integer
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe

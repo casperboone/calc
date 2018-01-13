@@ -1,9 +1,9 @@
-package nl.casperboone.calc.expressions
+package nl.casperboone.calc.expressions.interpretable
 
 import nl.casperboone.calc.values.Integer
 import nl.casperboone.calc.values.Value
 
-data class Addition(private val left: Expression, private val right: Expression) : Expression {
+data class Addition(private val left: InterpretableExpression, private val right: InterpretableExpression) : InterpretableExpression {
     override fun interpret(): Value {
         val leftInterpreted = left.interpret()
         val rightInterpreted = right.interpret()
