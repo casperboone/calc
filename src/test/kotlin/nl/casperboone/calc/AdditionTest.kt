@@ -1,25 +1,21 @@
 package nl.casperboone.calc
 
 import nl.casperboone.calc.expressions.desugarable.BinaryOperation
-import nl.casperboone.calc.expressions.desugarable.Integer
+import nl.casperboone.calc.values.Integer
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
 
-class ParserTest : Spek({
-    describe("a math expression parser") {
-        it("should parse an integer") {
-            assertThat(Grammar.parseProgram("1")).isEqualTo(Integer(1))
-        }
-
+class AdditionTest : Spek({
+    describe("the evaluation of an addition") {
         it("should parse an addition") {
             assertThat(Grammar.parseProgram("1 + 2"))
                     .isEqualTo(
                             BinaryOperation(
                                     "+",
-                                    Integer(1),
-                                    Integer(2)
+                                    nl.casperboone.calc.expressions.desugarable.Integer(1),
+                                    nl.casperboone.calc.expressions.desugarable.Integer(2)
                             )
                     )
         }
@@ -31,10 +27,10 @@ class ParserTest : Spek({
                                     "+",
                                     BinaryOperation(
                                             "+",
-                                            Integer(1),
-                                            Integer(2)
+                                            nl.casperboone.calc.expressions.desugarable.Integer(1),
+                                            nl.casperboone.calc.expressions.desugarable.Integer(2)
                                     ),
-                                    Integer(3)
+                                    nl.casperboone.calc.expressions.desugarable.Integer(3)
                             )
                     )
         }
@@ -44,14 +40,22 @@ class ParserTest : Spek({
                     .isEqualTo(
                             BinaryOperation(
                                     "+",
-                                    Integer(1),
+                                    nl.casperboone.calc.expressions.desugarable.Integer(1),
                                     BinaryOperation(
                                             "+",
-                                            Integer(2),
-                                            Integer(3)
+                                            nl.casperboone.calc.expressions.desugarable.Integer(2),
+                                            nl.casperboone.calc.expressions.desugarable.Integer(3)
                                     )
                             )
                     )
+        }
+
+        it("should interpret a simple addition") {
+            assertThat(evaluate("1 + 2")).isEqualTo(Integer(3))
+        }
+
+        it("should interpret nested addition statements") {
+            assertThat(evaluate("1 + 2 + 3")).isEqualTo(Integer(6))
         }
     }
 })

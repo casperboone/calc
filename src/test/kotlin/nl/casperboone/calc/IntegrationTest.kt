@@ -8,12 +8,8 @@ import org.jetbrains.spek.api.dsl.it
 
 class IntegrationTest : Spek({
     describe("a calculator application") {
-        it("should return the result of a simple addition") {
-            assertThat(evaluate("1 + 2")).isEqualTo(Integer(3))
-        }
-
-        it("should return the result of adding nested addition statements") {
-            assertThat(evaluate("1 + 2 + 3")).isEqualTo(Integer(6))
+        it("should return the result of a combined addition and subtraction") {
+            assertThat(evaluate("5 + 2 - 4")).isEqualTo(Integer(3))
         }
     }
 })
