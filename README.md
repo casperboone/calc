@@ -1,4 +1,6 @@
 # ➗  Calc
+[![Build Status](https://img.shields.io/travis/casperboone/calc/master.svg?style=flat-square)](https://travis-ci.org/casperboone/calc)
+
 A totally overkill command line math expression parser / interpreter.
 
 ## Installation
