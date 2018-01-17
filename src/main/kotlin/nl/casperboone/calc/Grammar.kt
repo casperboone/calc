@@ -16,6 +16,7 @@ object Grammar : Grammar<DesugarableExpression>() {
     private val INTEGER_CONSTANT by token("\\d+")
     private val PLUS by token("\\+")
     private val MINUS by token("\\-")
+    private val TIMES by token("\\*")
     private val WHITESPACE by token("\\s+", ignore = true)
 
     private val unaryMinusExpression = (-MINUS * parser(this::term)) map { UnaryOperation("-", it) }
@@ -26,7 +27,7 @@ object Grammar : Grammar<DesugarableExpression>() {
             unaryMinusExpression or
             bracedExpression
 
-    private val binaryOperatorTokens = PLUS or MINUS
+    private val binaryOperatorTokens = PLUS or MINUS or TIMES
     private val binaryOperatorChain by leftAssociative(term, binaryOperatorTokens) { a, op, b -> BinaryOperation(op.text, a, b)  }
 
     private val expr = binaryOperatorChain
