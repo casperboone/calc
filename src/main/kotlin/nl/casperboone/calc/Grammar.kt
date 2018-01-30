@@ -19,6 +19,7 @@ object Grammar : Grammar<AstNode>() {
     private val PLUS by token("\\+")
     private val MINUS by token("\\-")
     private val TIMES by token("\\*")
+    private val DIVISION by token("/")
     private val POWER by token("\\^")
     private val SQRT_TEXT by token("sqrt")
     private val SQRT_SIGN by token("√")
@@ -38,7 +39,7 @@ object Grammar : Grammar<AstNode>() {
             unarySqrtSignExpression or
             bracedExpression
 
-    private val binaryOperatorTokens = PLUS or MINUS or TIMES or POWER
+    private val binaryOperatorTokens = PLUS or MINUS or TIMES or DIVISION or POWER
     private val binaryOperatorChain by leftAssociative(term, binaryOperatorTokens) { a, op, b -> BinaryOperation(op.text, a, b) }
 
     private val expr = binaryOperatorChain
