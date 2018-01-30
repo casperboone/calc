@@ -4,7 +4,7 @@ import nl.casperboone.calc.ast.AstVisitor
 import nl.casperboone.calc.ast.numbers.Integer
 import nl.casperboone.calc.ast.operations.*
 
-class Desugarer : AstVisitor {
+object Desugarer : AstVisitor {
     override fun visit(integer: Integer) = Integer(integer.value)
 
     override fun visit(unaryOperation: UnaryOperation) = when(unaryOperation.operation) {

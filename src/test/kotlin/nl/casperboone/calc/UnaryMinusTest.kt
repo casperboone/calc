@@ -34,7 +34,7 @@ class UnaryMinusTest : Spek({
         }
 
         it("should desugar unary minus to a binary subtraction") {
-            assertThat(Grammar.parseProgram("-2").accept(Desugarer()))
+            assertThat(Grammar.parseProgram("-2").accept(Desugarer))
                     .isEqualTo(
                             Subtraction(
                                     Integer(0),

@@ -5,7 +5,7 @@ import nl.casperboone.calc.ast.AstVisitor
 import nl.casperboone.calc.ast.numbers.Integer
 import nl.casperboone.calc.ast.operations.*
 
-class Interpreter : AstVisitor {
+object Interpreter : AstVisitor {
     override fun visit(subtraction: Subtraction) = Integer(asInt(subtraction.left.accept(this)) - asInt(subtraction.right.accept(this)))
 
     override fun visit(multiplication: Multiplication) = Integer(asInt(multiplication.left.accept(this)) * asInt(multiplication.right.accept(this)))
