@@ -1,6 +1,7 @@
 package nl.casperboone.calc.ast.numbers
 
-import nl.casperboone.calc.ast.*
+import nl.casperboone.calc.ast.AstNode
+import nl.casperboone.calc.ast.AstVisitor
 
 data class Integer(val value: Int) : AstNode {
 

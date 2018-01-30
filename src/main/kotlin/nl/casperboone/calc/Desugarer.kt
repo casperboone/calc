@@ -7,12 +7,12 @@ import nl.casperboone.calc.ast.operations.*
 object Desugarer : AstVisitor {
     override fun visit(integer: Integer) = Integer(integer.value)
 
-    override fun visit(unaryOperation: UnaryOperation) = when(unaryOperation.operation) {
+    override fun visit(unaryOperation: UnaryOperation) = when (unaryOperation.operation) {
         "-" -> Subtraction(Integer(0), unaryOperation.value.accept(this))
         else -> throw Error("Unary operation ${unaryOperation.operation} is not supported")
     }
 
-    override fun visit(binaryOperation: BinaryOperation) = when(binaryOperation.operation) {
+    override fun visit(binaryOperation: BinaryOperation) = when (binaryOperation.operation) {
         "+" -> Addition(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
         "-" -> Subtraction(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
         "*" -> Multiplication(binaryOperation.left.accept(this), binaryOperation.right.accept(this))

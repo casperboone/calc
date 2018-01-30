@@ -28,7 +28,7 @@ object Grammar : Grammar<AstNode>() {
             bracedExpression
 
     private val binaryOperatorTokens = PLUS or MINUS or TIMES
-    private val binaryOperatorChain by leftAssociative(term, binaryOperatorTokens) { a, op, b -> BinaryOperation(op.text, a, b)  }
+    private val binaryOperatorChain by leftAssociative(term, binaryOperatorTokens) { a, op, b -> BinaryOperation(op.text, a, b) }
 
     private val expr = binaryOperatorChain
 

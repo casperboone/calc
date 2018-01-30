@@ -6,6 +6,6 @@ fun main(args: Array<String>) {
     println(evaluate(rawExpression))
 }
 
-val passes= arrayOf(Desugarer, Interpreter)
+val passes = arrayOf(Desugarer, Interpreter)
 
 fun evaluate(program: String) = passes.fold(Grammar.parseProgram(program)) { ast, visitor -> ast.accept(visitor) }

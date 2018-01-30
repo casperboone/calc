@@ -1,7 +1,7 @@
 package nl.casperboone.calc
 
-import nl.casperboone.calc.ast.operations.BinaryOperation
 import nl.casperboone.calc.ast.numbers.Integer
+import nl.casperboone.calc.ast.operations.BinaryOperation
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe

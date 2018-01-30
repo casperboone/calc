@@ -19,7 +19,7 @@ object Interpreter : AstVisitor {
     override fun visit(unaryOperation: UnaryOperation) = throw Error("Unary operations cannot be interpreted")
 }
 
-fun asInt(node: AstNode) : Int {
+fun asInt(node: AstNode): Int {
     if (node !is Integer) throw Error("Supplied argument not allowed for this operation")
     return node.value
 }
