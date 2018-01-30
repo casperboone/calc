@@ -20,15 +20,22 @@ object Grammar : Grammar<AstNode>() {
     private val MINUS by token("\\-")
     private val TIMES by token("\\*")
     private val POWER by token("\\^")
+    private val SQRT_TEXT by token("sqrt")
+    private val SQRT_SIGN by token("√")
     private val WHITESPACE by token("\\s+", ignore = true)
 
-    private val unaryMinusExpression = (-MINUS * parser(this::term)) map { UnaryOperation("-", it) }
     private val bracedExpression by -LPAR * parser(this::expr) * -RPAR
+
+    private val unaryMinusExpression = (-MINUS * parser(this::term)) map { UnaryOperation("-", it) }
+    private val unarySqrtTextExpression = (-SQRT_TEXT * parser(this::term)) map { UnaryOperation("sqrt", it) }
+    private val unarySqrtSignExpression = (-SQRT_SIGN * parser(this::term)) map { UnaryOperation("√", it) }
 
     private val term: Parser<AstNode> by
             (INTEGER_CONSTANT map { Integer(it.text.toInt()) }) or
             (FLOAT_CONSTANT map { Float(it.text.toDouble()) }) or
             unaryMinusExpression or
+            unarySqrtTextExpression or
+            unarySqrtSignExpression or
             bracedExpression
 
     private val binaryOperatorTokens = PLUS or MINUS or TIMES or POWER

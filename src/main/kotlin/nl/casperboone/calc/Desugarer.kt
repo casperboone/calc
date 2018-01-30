@@ -12,6 +12,8 @@ object Desugarer : AstVisitor {
 
     override fun visit(unaryOperation: UnaryOperation) = when (unaryOperation.operation) {
         "-" -> Subtraction(Integer(0), unaryOperation.value.accept(this))
+        "sqrt" -> SquareRoot(unaryOperation.value.accept(this))
+        "√" -> SquareRoot(unaryOperation.value.accept(this))
         else -> throw Error("Unary operation ${unaryOperation.operation} is not supported")
     }
 
@@ -24,10 +26,8 @@ object Desugarer : AstVisitor {
     }
 
     override fun visit(addition: Addition) = throw Error("Addition operation cannot be desugared")
-
     override fun visit(subtraction: Subtraction) = throw Error("Subtraction operation cannot be desugared")
-
     override fun visit(multiplication: Multiplication) = throw Error("Multiplication operation cannot be desugared")
-
     override fun visit(power: Power) = throw Error("Power operation cannot be desugared")
+    override fun visit(squareRoot: SquareRoot) = throw Error("Square root operation cannot be desugared")
 }

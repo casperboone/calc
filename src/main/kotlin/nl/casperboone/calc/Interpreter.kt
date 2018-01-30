@@ -6,6 +6,7 @@ import nl.casperboone.calc.ast.numbers.Float
 import nl.casperboone.calc.ast.numbers.Integer
 import nl.casperboone.calc.ast.operations.*
 import kotlin.math.pow
+import kotlin.math.sqrt
 
 object Interpreter : AstVisitor {
     override fun visit(addition: Addition) = when (determineNumberTypes(addition.left, addition.right)) {
@@ -24,6 +25,8 @@ object Interpreter : AstVisitor {
     }
 
     override fun visit(power: Power) = Float(asDouble(power.left.accept(this)).pow(asDouble(power.right.accept(this))))
+
+    override fun visit(squareRoot: SquareRoot) = Float(sqrt(asDouble(squareRoot.value.accept(this))))
 
     override fun visit(integer: Integer) = Integer(integer.value)
 
