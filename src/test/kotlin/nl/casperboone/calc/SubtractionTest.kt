@@ -1,12 +1,11 @@
 package nl.casperboone.calc
 
-import nl.casperboone.calc.expressions.desugarable.BinaryOperation
-import nl.casperboone.calc.values.Integer as IntegerValue
+import nl.casperboone.calc.ast.numbers.Integer
+import nl.casperboone.calc.ast.operations.BinaryOperation
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
-import nl.casperboone.calc.expressions.desugarable.Integer as DesugarableIntegerExpression
 
 class SubtractionTest : Spek({
     describe("the evaluation of a subtraction") {
@@ -15,8 +14,8 @@ class SubtractionTest : Spek({
                     .isEqualTo(
                             BinaryOperation(
                                     "-",
-                                    DesugarableIntegerExpression(1),
-                                    DesugarableIntegerExpression(2)
+                                    Integer(1),
+                                    Integer(2)
                             )
                     )
         }
@@ -28,10 +27,10 @@ class SubtractionTest : Spek({
                                     "-",
                                     BinaryOperation(
                                             "-",
-                                            DesugarableIntegerExpression(1),
-                                            DesugarableIntegerExpression(2)
+                                            Integer(1),
+                                            Integer(2)
                                     ),
-                                    DesugarableIntegerExpression(3)
+                                    Integer(3)
                             )
                     )
         }
@@ -41,22 +40,22 @@ class SubtractionTest : Spek({
                     .isEqualTo(
                             BinaryOperation(
                                     "-",
-                                    DesugarableIntegerExpression(1),
+                                    Integer(1),
                                     BinaryOperation(
                                             "-",
-                                            DesugarableIntegerExpression(2),
-                                            DesugarableIntegerExpression(3)
+                                            Integer(2),
+                                            Integer(3)
                                     )
                             )
                     )
         }
 
         it("should interpret a simple subtraction") {
-            assertThat(evaluate("1 - 2")).isEqualTo(IntegerValue(-1))
+            assertThat(evaluate("1 - 2")).isEqualTo(Integer(-1))
         }
 
         it("should interpret nested addition statements") {
-            assertThat(evaluate("1 - 2 - 3")).isEqualTo(IntegerValue(-4))
+            assertThat(evaluate("1 - 2 - 3")).isEqualTo(Integer(-4))
         }
     }
 })

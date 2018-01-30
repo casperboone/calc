@@ -5,12 +5,12 @@ import com.github.h0tk3y.betterParse.grammar.Grammar
 import com.github.h0tk3y.betterParse.grammar.parseToEnd
 import com.github.h0tk3y.betterParse.grammar.parser
 import com.github.h0tk3y.betterParse.parser.Parser
-import nl.casperboone.calc.expressions.desugarable.BinaryOperation
-import nl.casperboone.calc.expressions.desugarable.DesugarableExpression
-import nl.casperboone.calc.expressions.desugarable.Integer
-import nl.casperboone.calc.expressions.desugarable.UnaryOperation
+import nl.casperboone.calc.ast.AstNode
+import nl.casperboone.calc.ast.numbers.Integer
+import nl.casperboone.calc.ast.operations.BinaryOperation
+import nl.casperboone.calc.ast.operations.UnaryOperation
 
-object Grammar : Grammar<DesugarableExpression>() {
+object Grammar : Grammar<AstNode>() {
     private val LPAR by token("\\(")
     private val RPAR by token("\\)")
     private val INTEGER_CONSTANT by token("\\d+")
@@ -22,7 +22,7 @@ object Grammar : Grammar<DesugarableExpression>() {
     private val unaryMinusExpression = (-MINUS * parser(this::term)) map { UnaryOperation("-", it) }
     private val bracedExpression by -LPAR * parser(this::expr) * -RPAR
 
-    private val term: Parser<DesugarableExpression> by
+    private val term: Parser<AstNode> by
             (INTEGER_CONSTANT map { Integer(it.text.toInt()) }) or
             unaryMinusExpression or
             bracedExpression

@@ -1,7 +1,7 @@
 package nl.casperboone.calc
 
-import nl.casperboone.calc.expressions.desugarable.BinaryOperation
-import nl.casperboone.calc.values.Integer
+import nl.casperboone.calc.ast.operations.BinaryOperation
+import nl.casperboone.calc.ast.numbers.Integer
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
@@ -14,8 +14,8 @@ class AdditionTest : Spek({
                     .isEqualTo(
                             BinaryOperation(
                                     "+",
-                                    nl.casperboone.calc.expressions.desugarable.Integer(1),
-                                    nl.casperboone.calc.expressions.desugarable.Integer(2)
+                                    Integer(1),
+                                    Integer(2)
                             )
                     )
         }
@@ -27,10 +27,10 @@ class AdditionTest : Spek({
                                     "+",
                                     BinaryOperation(
                                             "+",
-                                            nl.casperboone.calc.expressions.desugarable.Integer(1),
-                                            nl.casperboone.calc.expressions.desugarable.Integer(2)
+                                            Integer(1),
+                                            Integer(2)
                                     ),
-                                    nl.casperboone.calc.expressions.desugarable.Integer(3)
+                                    Integer(3)
                             )
                     )
         }
@@ -40,11 +40,11 @@ class AdditionTest : Spek({
                     .isEqualTo(
                             BinaryOperation(
                                     "+",
-                                    nl.casperboone.calc.expressions.desugarable.Integer(1),
+                                    Integer(1),
                                     BinaryOperation(
                                             "+",
-                                            nl.casperboone.calc.expressions.desugarable.Integer(2),
-                                            nl.casperboone.calc.expressions.desugarable.Integer(3)
+                                            Integer(2),
+                                            Integer(3)
                                     )
                             )
                     )

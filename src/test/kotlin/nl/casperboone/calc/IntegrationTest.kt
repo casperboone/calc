@@ -1,6 +1,6 @@
 package nl.casperboone.calc
 
-import nl.casperboone.calc.values.Integer
+import nl.casperboone.calc.ast.numbers.Integer
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
