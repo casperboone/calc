@@ -1,11 +1,14 @@
 package nl.casperboone.calc
 
 import nl.casperboone.calc.ast.AstVisitor
+import nl.casperboone.calc.ast.numbers.Float
 import nl.casperboone.calc.ast.numbers.Integer
 import nl.casperboone.calc.ast.operations.*
 
 object Desugarer : AstVisitor {
     override fun visit(integer: Integer) = Integer(integer.value)
+
+    override fun visit(float: Float) = Float(float.value)
 
     override fun visit(unaryOperation: UnaryOperation) = when (unaryOperation.operation) {
         "-" -> Subtraction(Integer(0), unaryOperation.value.accept(this))
@@ -16,6 +19,7 @@ object Desugarer : AstVisitor {
         "+" -> Addition(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
         "-" -> Subtraction(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
         "*" -> Multiplication(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
+        "^" -> Power(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
         else -> throw Error("Binary operation ${binaryOperation.operation} is not supported")
     }
 
@@ -25,5 +29,5 @@ object Desugarer : AstVisitor {
 
     override fun visit(multiplication: Multiplication) = throw Error("Multiplication operation cannot be desugared")
 
-
+    override fun visit(power: Power) = throw Error("Power operation cannot be desugared")
 }

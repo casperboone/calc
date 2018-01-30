@@ -1,5 +1,6 @@
 package nl.casperboone.calc
 
+import nl.casperboone.calc.ast.numbers.Float
 import nl.casperboone.calc.ast.numbers.Integer
 import nl.casperboone.calc.ast.operations.BinaryOperation
 import org.assertj.core.api.Assertions.assertThat
@@ -56,6 +57,10 @@ class SubtractionTest : Spek({
 
         it("should interpret nested addition statements") {
             assertThat(evaluate("1 - 2 - 3")).isEqualTo(Integer(-4))
+        }
+
+        it("should interpret a subtraction with floats") {
+            assertThat(evaluate("1.3 - 0.5")).isEqualTo(Float(0.8))
         }
     }
 })

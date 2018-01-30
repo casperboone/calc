@@ -1,6 +1,8 @@
 package nl.casperboone.calc
 
+import nl.casperboone.calc.ast.numbers.Float
 import nl.casperboone.calc.ast.numbers.Integer
+import nl.casperboone.calc.ast.operations.Addition
 import nl.casperboone.calc.ast.operations.BinaryOperation
 import org.assertj.core.api.Assertions.assertThat
 import org.jetbrains.spek.api.Spek
@@ -56,6 +58,10 @@ class AdditionTest : Spek({
 
         it("should interpret nested addition statements") {
             assertThat(evaluate("1 + 2 + 3")).isEqualTo(Integer(6))
+        }
+
+        it("should interpret a simple addition with floats") {
+            assertThat(evaluate("1.3 + 2.4")).isEqualTo(Float(3.7))
         }
     }
 })
