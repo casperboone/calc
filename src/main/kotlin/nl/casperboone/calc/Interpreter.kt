@@ -24,10 +24,7 @@ object Interpreter : AstVisitor {
         NumberArguments.SOME_FLOAT -> Float(asDouble(multiplication.left.accept(this)) * asDouble(multiplication.right.accept(this)))
     }
 
-    override fun visit(division: Division) = when (determineNumberTypes(division.left, division.right)) {
-        NumberArguments.ALL_INTEGER -> Integer(asInt(division.left.accept(this)) / asInt(division.right.accept(this)))
-        NumberArguments.SOME_FLOAT -> Float(asDouble(division.left.accept(this)) / asDouble(division.right.accept(this)))
-    }
+    override fun visit(division: Division) = Float(asDouble(division.left.accept(this)) / asDouble(division.right.accept(this)))
 
     override fun visit(power: Power) = Float(asDouble(power.left.accept(this)).pow(asDouble(power.right.accept(this))))
 

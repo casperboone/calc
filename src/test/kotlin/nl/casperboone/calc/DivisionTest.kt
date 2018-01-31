@@ -52,11 +52,15 @@ class DivisionTest : Spek({
         }
 
         it("should interpret a simple division") {
-            assertThat(evaluate("10 / 2")).isEqualTo(Integer(5))
+            assertThat(evaluate("10 / 2")).isEqualTo(Float(5.0))
+        }
+
+        it("should interpret a simple division with a float result") {
+            assertThat(evaluate("10 / 4")).isEqualTo(Float(2.5))
         }
 
         it("should interpret nested multiplication statements") {
-            assertThat(evaluate("20 / 2 / 2")).isEqualTo(Integer(5))
+            assertThat(evaluate("20 / 2 / 2")).isEqualTo(Float(5.0))
         }
 
         it("should interpret a division with floats") {
