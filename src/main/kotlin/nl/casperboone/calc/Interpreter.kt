@@ -9,19 +9,34 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 object Interpreter : AstVisitor {
-    override fun visit(addition: Addition) = when (determineNumberTypes(addition.left, addition.right)) {
-        NumberArguments.ALL_INTEGER -> Integer(asInt(addition.left.accept(this)) + asInt(addition.right.accept(this)))
-        NumberArguments.SOME_FLOAT -> Float(asDouble(addition.left.accept(this)) + asDouble(addition.right.accept(this)))
+    override fun visit(addition: Addition): AstNode {
+        val left = addition.left.accept(this)
+        val right = addition.right.accept(this)
+
+        return when (determineNumberTypes(left, right)) {
+            NumberArguments.ALL_INTEGER -> Integer(asInt(left) + asInt(right))
+            NumberArguments.SOME_FLOAT -> Float(asDouble(left) + asDouble(right))
+        }
     }
 
-    override fun visit(subtraction: Subtraction) = when (determineNumberTypes(subtraction.left, subtraction.right)) {
-        NumberArguments.ALL_INTEGER -> Integer(asInt(subtraction.left.accept(this)) - asInt(subtraction.right.accept(this)))
-        NumberArguments.SOME_FLOAT -> Float(asDouble(subtraction.left.accept(this)) - asDouble(subtraction.right.accept(this)))
+    override fun visit(subtraction: Subtraction): AstNode {
+        val left = subtraction.left.accept(this)
+        val right = subtraction.right.accept(this)
+
+        return when (determineNumberTypes(left, right)) {
+            NumberArguments.ALL_INTEGER -> Integer(asInt(left) - asInt(right))
+            NumberArguments.SOME_FLOAT -> Float(asDouble(left) - asDouble(right))
+        }
     }
 
-    override fun visit(multiplication: Multiplication) = when (determineNumberTypes(multiplication.left, multiplication.right)) {
-        NumberArguments.ALL_INTEGER -> Integer(asInt(multiplication.left.accept(this)) * asInt(multiplication.right.accept(this)))
-        NumberArguments.SOME_FLOAT -> Float(asDouble(multiplication.left.accept(this)) * asDouble(multiplication.right.accept(this)))
+    override fun visit(multiplication: Multiplication): AstNode {
+        val left = multiplication.left.accept(this)
+        val right = multiplication.right.accept(this)
+
+        return when (determineNumberTypes(left, right)) {
+            NumberArguments.ALL_INTEGER -> Integer(asInt(left) * asInt(right))
+            NumberArguments.SOME_FLOAT -> Float(asDouble(left) * asDouble(right))
+        }
     }
 
     override fun visit(division: Division) = Float(asDouble(division.left.accept(this)) / asDouble(division.right.accept(this)))

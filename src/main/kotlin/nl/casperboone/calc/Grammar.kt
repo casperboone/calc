@@ -27,13 +27,16 @@ object Grammar : Grammar<AstNode>() {
 
     private val bracedExpression by -LPAR * parser(this::expr) * -RPAR
 
+    private val integerExpression: Parser<AstNode> = INTEGER_CONSTANT map { Integer(it.text.toInt()) }
+    private val floatExpression: Parser<AstNode> = FLOAT_CONSTANT map { Float(it.text.toDouble()) }
+
     private val unaryMinusExpression = (-MINUS * parser(this::term)) map { UnaryOperation("-", it) }
     private val unarySqrtTextExpression = (-SQRT_TEXT * parser(this::term)) map { UnaryOperation("sqrt", it) }
     private val unarySqrtSignExpression = (-SQRT_SIGN * parser(this::term)) map { UnaryOperation("√", it) }
 
     private val term: Parser<AstNode> by
-            (INTEGER_CONSTANT map { Integer(it.text.toInt()) }) or
-            (FLOAT_CONSTANT map { Float(it.text.toDouble()) }) or
+            integerExpression or
+            floatExpression or
             unaryMinusExpression or
             unarySqrtTextExpression or
             unarySqrtSignExpression or
