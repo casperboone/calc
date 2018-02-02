@@ -59,7 +59,7 @@ class DivisionTest : Spek({
             assertThat(evaluate("10 / 4")).isEqualTo(Float(2.5))
         }
 
-        it("should interpret nested multiplication statements") {
+        it("should interpret nested times statements") {
             assertThat(evaluate("20 / 2 / 2")).isEqualTo(Float(5.0))
         }
 

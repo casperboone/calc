@@ -9,8 +9,8 @@ import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
 
 class MultiplicationTest : Spek({
-    describe("the evaluation of an multiplication") {
-        it("should parse an multiplication") {
+    describe("the evaluation of an times") {
+        it("should parse an times") {
             assertThat(Grammar.parseProgram("3 * 2"))
                     .isEqualTo(
                             BinaryOperation(
@@ -36,7 +36,7 @@ class MultiplicationTest : Spek({
                     )
         }
 
-        it("should give precedence to multiplication statements between braces") {
+        it("should give precedence to times statements between braces") {
             assertThat(Grammar.parseProgram("5 * (2 * 3)"))
                     .isEqualTo(
                             BinaryOperation(
@@ -51,15 +51,15 @@ class MultiplicationTest : Spek({
                     )
         }
 
-        it("should interpret a simple multiplication") {
+        it("should interpret a simple times") {
             assertThat(evaluate("5 * 2")).isEqualTo(Integer(10))
         }
 
-        it("should interpret nested multiplication statements") {
+        it("should interpret nested times statements") {
             assertThat(evaluate("5 * 2 * 3")).isEqualTo(Integer(30))
         }
 
-        it("should interpret a multiplication with floats") {
+        it("should interpret a times with floats") {
             assertThat(evaluate("5.3 * 2.5")).isEqualTo(Float(13.25))
         }
     }
