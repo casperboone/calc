@@ -4,7 +4,7 @@
 A totally overkill command line math expression parser / interpreter.
 
 ## Installation
-Install instructions will follow soon.
+Installation instructions will follow soon.
 
 ## Usage
 For short expressions, the easiest way to use the calculator is by passing a math expression as a command line argument to the application.
@@ -35,14 +35,8 @@ Digits          => [0-9]+
 ```
 
 _Notes (not necessarily related to the specification):_
-> The square root operation is desugared to a power operation.
-> 
 > The unary operations `sqrt` and `√` are equivalent.
+
+> The binary operations `mod` and `%` are equivalent.
 > 
 > In the current version multiple-expression programs are not allowed.
-
-## Evaluation Workflow
-1. Parsing to `DesugarableExpression`
-2. Desugar to `TypeCheckableExpression`
-2. Type check and transform to `InterpretableExpression`
-4. Interpret to `Value`
