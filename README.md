@@ -25,7 +25,7 @@ Program         => Expression+
 Expression      => ( Expression ) | UnaryOperation Expression | Expression BinaryOperation Expression | Number
 
 UnaryOperation  => - | sqrt | √
-BinaryOperation => + | - | / | * | ^
+BinaryOperation => + | - | / | * | ^ | % | mod
 
 Number          => Integer | Float
 Integer         => Digits

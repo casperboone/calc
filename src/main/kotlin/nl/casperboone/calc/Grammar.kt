@@ -23,6 +23,8 @@ object Grammar : Grammar<AstNode>() {
     private val POWER by token("\\^")
     private val SQRT_TEXT by token("sqrt")
     private val SQRT_SIGN by token("√")
+    private val MOD_TEXT by token("mod")
+    private val MOD_SIGN by token("%")
     private val WHITESPACE by token("\\s+", ignore = true)
 
     private val bracedExpression by -LPAR * parser(this::expr) * -RPAR
@@ -42,7 +44,7 @@ object Grammar : Grammar<AstNode>() {
             unarySqrtSignExpression or
             bracedExpression
 
-    private val binaryOperatorTokens = PLUS or MINUS or TIMES or DIVISION or POWER
+    private val binaryOperatorTokens = PLUS or MINUS or TIMES or DIVISION or POWER or MOD_TEXT or MOD_SIGN
     private val binaryOperatorChain by leftAssociative(term, binaryOperatorTokens) { a, op, b -> BinaryOperation(op.text, a, b) }
 
     private val expr = binaryOperatorChain

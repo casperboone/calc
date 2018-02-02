@@ -13,6 +13,7 @@ interface AstVisitor {
     fun visit(subtraction: Subtraction): AstNode
     fun visit(multiplication: Multiplication): AstNode
     fun visit(division: Division): AstNode
+    fun visit(modulo: Modulo): AstNode
     fun visit(power: Power): AstNode
     fun visit(squareRoot: SquareRoot): AstNode
 }

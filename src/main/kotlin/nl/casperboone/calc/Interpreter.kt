@@ -18,6 +18,8 @@ object Interpreter : AstVisitor {
 
     override fun visit(division: Division) = Float(asDouble(interpret(division.left)) / asDouble(interpret(division.right)))
 
+    override fun visit(modulo: Modulo) = Integer(asInt(interpret(modulo.left)) % asInt(interpret(modulo.right)))
+
     override fun visit(power: Power) = Float(asDouble(interpret(power.left)).pow(asDouble(interpret(power.right))))
 
     override fun visit(squareRoot: SquareRoot) = Float(sqrt(asDouble(interpret(squareRoot.value))))
@@ -29,6 +31,11 @@ object Interpreter : AstVisitor {
     override fun visit(binaryOperation: BinaryOperation) = throw Error("Binary operations cannot be interpreted")
 
     override fun visit(unaryOperation: UnaryOperation) = throw Error("Unary operations cannot be interpreted")
+
+    private fun asInt(node: AstNode): Int = when (node) {
+        is Integer -> node.value
+        else -> throw Error("Supplied argument not allowed for this operation")
+    }
 
     private fun asDouble(node: AstNode): Double = when (node) {
         is Integer -> node.value.toDouble()

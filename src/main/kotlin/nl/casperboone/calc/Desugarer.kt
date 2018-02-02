@@ -22,6 +22,8 @@ object Desugarer : AstVisitor {
         "-" -> Subtraction(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
         "*" -> Multiplication(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
         "/" -> Division(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
+        "%" -> Modulo(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
+        "mod" -> Modulo(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
         "^" -> Power(binaryOperation.left.accept(this), binaryOperation.right.accept(this))
         else -> throw Error("Binary operation ${binaryOperation.operation} is not supported")
     }
@@ -30,6 +32,7 @@ object Desugarer : AstVisitor {
     override fun visit(subtraction: Subtraction) = throw Error("Subtraction operation cannot be desugared")
     override fun visit(multiplication: Multiplication) = throw Error("Multiplication operation cannot be desugared")
     override fun visit(division: Division) = throw Error("Multiplication operation cannot be desugared")
+    override fun visit(modulo: Modulo) = throw Error("Modulo operation cannot be desugared")
     override fun visit(power: Power) = throw Error("Power operation cannot be desugared")
     override fun visit(squareRoot: SquareRoot) = throw Error("Square root operation cannot be desugared")
 }
